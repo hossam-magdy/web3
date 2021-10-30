@@ -8,9 +8,9 @@
  *  
  */
 
-const SHA256 = require('crypto-js/sha256');
 const BlockClass = require('./block.js');
 const bitcoinMessage = require('bitcoinjs-message');
+const { calculateBlockHash } = require('./calculateBlockHash.js');
 
 class Blockchain {
 
@@ -34,8 +34,8 @@ class Blockchain {
      * Passing as a data `{data: 'Genesis Block'}`
      */
     async initializeChain() {
-        if( this.height === -1){
-            let block = new BlockClass.Block({data: 'Genesis Block'});
+        if (this.height === -1) {
+            let block = new BlockClass.Block({ data: 'Genesis Block' });
             await this._addBlock(block);
         }
     }
@@ -64,7 +64,20 @@ class Blockchain {
     _addBlock(block) {
         let self = this;
         return new Promise(async (resolve, reject) => {
-           
+            try {
+                block.height = self.height + 1;
+                block.previousBlockHash = self.height >= 0 ? self.chain[self.height].hash : '0x';
+                block.timestamp = new Date().getTime().toString().substr(0, -3);
+                block.hash = calculateBlockHash(block);
+
+                self.chain.push(block);
+                self.height++;
+
+                self.validateChain();
+                resolve(block);
+            } catch (e) {
+                reject(e);
+            }
         });
     }
 
@@ -78,7 +91,8 @@ class Blockchain {
      */
     requestMessageOwnershipVerification(address) {
         return new Promise((resolve) => {
-            
+            const time = new Date().getTime().toString().slice(0, -3);
+            resolve(`${address}:${time}:starRegistry`);
         });
     }
 
@@ -91,7 +105,7 @@ class Blockchain {
      * 1. Get the time from the message sent as a parameter example: `parseInt(message.split(':')[1])`
      * 2. Get the current time: `let currentTime = parseInt(new Date().getTime().toString().slice(0, -3));`
      * 3. Check if the time elapsed is less than 5 minutes
-     * 4. Veify the message with wallet address and signature: `bitcoinMessage.verify(message, address, signature)`
+     * 4. Verify the message with wallet address and signature: `bitcoinMessage.verify(message, address, signature)`
      * 5. Create the block and add it to the chain
      * 6. Resolve with the block added.
      * @param {*} address 
@@ -102,7 +116,25 @@ class Blockchain {
     submitStar(address, message, signature, star) {
         let self = this;
         return new Promise(async (resolve, reject) => {
-            
+            const time = parseInt(message.split(':')[1]);
+
+            const currentTime = parseInt(new Date().getTime().toString().slice(0, -3));
+            if ((currentTime - time) > 5 * 60) {
+                reject('Message expired');
+                return;
+            }
+
+            try {
+                bitcoinMessage.verify(message, address, signature)
+            } catch (e) {
+                reject(e);
+                return;
+            }
+
+            const block = new BlockClass.Block({ address, message, star });
+            self._addBlock(block);
+
+            resolve(block);
         });
     }
 
@@ -115,7 +147,12 @@ class Blockchain {
     getBlockByHash(hash) {
         let self = this;
         return new Promise((resolve, reject) => {
-           
+            const foundBlock = self.chain.find(block => block.hash === hash);
+            if (foundBlock) {
+                resolve(foundBlock);
+            } else {
+                reject('NOT FOUND');
+            }
         });
     }
 
@@ -128,11 +165,7 @@ class Blockchain {
         let self = this;
         return new Promise((resolve, reject) => {
             let block = self.chain.filter(p => p.height === height)[0];
-            if(block){
-                resolve(block);
-            } else {
-                resolve(null);
-            }
+            resolve(block);
         });
     }
 
@@ -142,11 +175,19 @@ class Blockchain {
      * Remember the star should be returned decoded.
      * @param {*} address 
      */
-    getStarsByWalletAddress (address) {
+    getStarsByWalletAddress(address) {
         let self = this;
         let stars = [];
-        return new Promise((resolve, reject) => {
-            
+        return new Promise(async (resolve, reject) => {
+            try {
+                const bDataArray = await Promise.all(self.chain.map(block => block.getBData()));
+                const stars = bDataArray
+                    .filter(bDataRes => bDataRes.address === address)
+                    .map(bDataRes => bDataRes.star);
+                resolve(stars);
+            } catch (e) {
+                reject(e);
+            }
         });
     }
 
@@ -160,10 +201,23 @@ class Blockchain {
         let self = this;
         let errorLog = [];
         return new Promise(async (resolve, reject) => {
-            
+            try {
+                for (let i = 0; i++; i < self.chain.length) {
+                    const block = self.chain[i];
+                    await block.validate().catch(e => errorLog.push(e));
+
+                    const prevBlock = i > 0 ? self.chain[i - 1] : undefined;
+                    if (prevBlock && block.previousBlockHash !== prevBlock.hash) {
+                        errorLog.push(`Block #${i} has invalid previousBlockHash`);
+                    }
+                }
+                resolve(errorLog);
+            } catch (e) {
+                reject(e);
+            }
         });
     }
 
 }
 
-module.exports.Blockchain = Blockchain;   
+module.exports.Blockchain = Blockchain;

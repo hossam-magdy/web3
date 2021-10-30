@@ -73,7 +73,12 @@ class Blockchain {
                 self.chain.push(block);
                 self.height++;
 
-                self.validateChain();
+                const chainValidationErrors = await self.validateChain();
+                if (chainValidationErrors.length > 0) {
+                    reject(chainValidationErrors);
+                    return;
+                }
+
                 resolve(block);
             } catch (e) {
                 reject(e);
@@ -208,7 +213,7 @@ class Blockchain {
 
                     const prevBlock = i > 0 ? self.chain[i - 1] : undefined;
                     if (prevBlock && block.previousBlockHash !== prevBlock.hash) {
-                        errorLog.push(`Block #${i} has invalid previousBlockHash`);
+                        errorLog.push(`Block #${i} has an invalid previousBlockHash`);
                     }
                 }
                 resolve(errorLog);

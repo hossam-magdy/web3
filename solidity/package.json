@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "compile": "yarn truffle compile"
+  },
   "dependencies": {
-    "openzeppelin-solidity": "^4.4.1",
-    "truffle": "^5.4.25",
+    "@openzeppelin/contracts": "^4.4.1",
     "truffle-hdwallet-provider": "^1.0.17"
+  },
+  "devDependencies": {
+    "truffle": "^5.4.25"
   }
 }

@@ -1,0 +1,11 @@
+{
+  "name": "solidity",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "openzeppelin-solidity": "^4.4.1",
+    "truffle": "^5.4.25",
+    "truffle-hdwallet-provider": "^1.0.17"
+  }
+}

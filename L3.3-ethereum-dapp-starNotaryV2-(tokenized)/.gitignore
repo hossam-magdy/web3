@@ -1,2 +1,6 @@
 node_modules
 build
+contracts/~*
+contracts/*.abi.json
+contracts/*.tvc
+.secret

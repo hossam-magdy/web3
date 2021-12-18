@@ -8,40 +8,40 @@ contract StarNotary is ERC721 {
         string name;
     }
 
-    mapping(uint256 => Star) starsInfos;
-    mapping(uint256 => uint256) starsForSale;
+    mapping(uint256 => Star) public tokenIdToStarInfo;
+    mapping(uint256 => uint256) public starsForSale;
 
+    constructor() ERC721("StarNotaryV2", "STAR") {}
+
+    // Create Star using the Struct
     function createStar(string memory _name, uint256 _tokenId) public {
-        Star memory newStar = Star(_name);
-        starsInfos[_tokenId] = newStar;
-        _mint(msg.sender, _tokenId);
+        // Passing the name and tokenId as a parameters
+        Star memory newStar = Star(_name); // Star is an struct so we are creating a new Star
+        tokenIdToStarInfo[_tokenId] = newStar; // Creating in memory the Star -> tokenId mapping
+        _mint(msg.sender, _tokenId); // _mint assign the the star with _tokenId to the sender address (ownership)
     }
 
-    function setStarUpForSale(uint256 _tokenId, uint256 _price) public {
-        require(ownerOf(_tokenId) == msg.sender);
+    // Putting an Star for sale (Adding the star tokenid into the mapping starsForSale, first verify that the sender is the owner)
+    function putStarUpForSale(uint256 _tokenId, uint256 _price) public {
+        require(
+            ownerOf(_tokenId) == msg.sender,
+            "You can't sale a Star you don't own"
+        );
         starsForSale[_tokenId] = _price;
     }
 
     function buyStar(uint256 _tokenId) public payable {
         uint256 starCost = starsForSale[_tokenId];
-        require(starCost > 0);
-        require(msg.value >= starCost);
+        address ownerAddress = ownerOf(_tokenId);
 
-        address oldOwner = ownerOf(_tokenId);
+        require(starCost > 0, "The Star should be up for sale");
+        require(msg.value >= starCost, "You need to have enough Ether");
 
-        // _owners[_tokenId] = msg.sender;
-        _transfer(oldOwner, msg.sender, _tokenId);
+        transferFrom(ownerAddress, msg.sender, _tokenId); // We can't use _addTokenTo or_removeTokenFrom functions, now we have to use _transferFrom
 
-        oldOwner.transfer(starCost);
-        if (msg.value - starCost) {
-            msg.sender.transfer(msg.value - starCost);
+        payable(ownerAddress).transfer(starCost); // We need to make this conversion to be able to use transfer() function to transfer ethers
+        if (msg.value > starCost) {
+            payable(msg.sender).transfer(msg.value - starCost);
         }
-
-        starsForSale[_tokenId] = 0;
-        // require msg.value >= cost
-        // change star owner to msg.sender
-        // transfer cost to owner
-        // if any, transfer change back to sender
-        // remove star from upForSale list
     }
 }

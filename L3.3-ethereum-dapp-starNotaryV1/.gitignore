@@ -3,3 +3,4 @@ build
 contracts/~*
 contracts/*.abi.json
 contracts/*.tvc
+.secret

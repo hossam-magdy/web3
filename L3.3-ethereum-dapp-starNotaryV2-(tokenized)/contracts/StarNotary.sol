@@ -37,7 +37,7 @@ contract StarNotary is ERC721 {
         require(starCost > 0, "The Star should be up for sale");
         require(msg.value >= starCost, "You need to have enough Ether");
 
-        transferFrom(ownerAddress, msg.sender, _tokenId); // We can't use _addTokenTo or_removeTokenFrom functions, now we have to use _transferFrom
+        _transfer(ownerAddress, msg.sender, _tokenId); // We can't use _addTokenTo or_removeTokenFrom functions, now we have to use _transferFrom
 
         payable(ownerAddress).transfer(starCost); // We need to make this conversion to be able to use transfer() function to transfer ethers
         if (msg.value > starCost) {

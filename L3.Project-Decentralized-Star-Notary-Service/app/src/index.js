@@ -18,6 +18,10 @@ const App = {
         deployedNetwork.address
       );
 
+      console.log('Web3 connection info:');
+      console.log('- Network ID:', networkId);
+      console.log('- Contract Address:', deployedNetwork.address);
+
       // get accounts
       const accounts = await web3.eth.getAccounts();
       this.account = accounts[0];
@@ -35,12 +39,19 @@ const App = {
     const { createStar } = this.meta.methods;
     const name = document.getElementById('starName').value;
     const id = document.getElementById('starId').value;
+    App.setStatus('Loading ...');
     await createStar(name, id).send({ from: this.account });
-    App.setStatus('New Star Owner is ' + this.account + '.');
+    App.setStatus(`New Star Owner is "${this.account}".`);
   },
 
   // Implement Task 4 Modify the front end of the DAPP
-  lookUp: async function () {},
+  lookUp: async function () {
+    const { tokenIdToStarInfo } = this.meta.methods;
+    const id = document.getElementById('lookid').value;
+    App.setStatus('Loading ...');
+    const name = await tokenIdToStarInfo(id).call();
+    App.setStatus(name ? `Looked up Star name: "${name}".` : 'Star not found!');
+  },
 };
 
 window.App = App;

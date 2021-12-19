@@ -1,0 +1,13 @@
+{
+  "name": "Decentralized-Star-Notary-Service-ND1309",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:hossam-magdy/starnotary-nd1309.git",
+  "author": "Hossam Magdy <hossam.magdy@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.4.1",
+    "@truffle/hdwallet-provider": "^2.0.0",
+    "web3": "^1.6.1"
+  }
+}

@@ -38,6 +38,9 @@ const App = {
     await createStar(name, id).send({ from: this.account });
     App.setStatus('New Star Owner is ' + this.account + '.');
   },
+
+  // Implement Task 4 Modify the front end of the DAPP
+  lookUp: async function () {},
 };
 
 window.App = App;

@@ -12,6 +12,7 @@ contract LemonadeStand {
     // Event: 'State' with value 'ForSale'
     enum State {
         ForSale,
+        Shipped,
         Sold
     }
 
@@ -31,34 +32,40 @@ contract LemonadeStand {
     // Events
     event ForSale(uint256 skuCount);
     event Sold(uint256 sku);
+    event Shipped(uint256 sku);
 
     // Modifier: Only Owner see if msg.sender == owner of the contract
     modifier onlyOwner() {
-        require(msg.sender == owner);
+        require(msg.sender == owner, "Only owner is allowed");
         _;
     }
 
     // Define a modifier that verifies the Caller
     modifier verifyCaller(address _address) {
-        require(msg.sender == _address);
+        require(msg.sender == _address, "Caller is not verified");
         _;
     }
 
     // Define a modifier that checks if the paid amount is sufficient to cover the price
     modifier paidEnough(uint256 _price) {
-        require(msg.value >= _price);
+        require(msg.value >= _price, "Not enough value paid");
         _;
     }
 
     // Define a modifier that checks if an item.state of a sku is ForSale
     modifier forSale(uint256 _sku) {
-        require(items[_sku].state == State.ForSale);
+        require(items[_sku].state == State.ForSale, "Not for sale");
         _;
     }
 
     // Define a modifier that checks if an item.state of a sku is Sold
     modifier sold(uint256 _sku) {
-        require(items[_sku].state == State.Sold);
+        require(items[_sku].state == State.Sold, "Not sold");
+        _;
+    }
+
+    modifier shipped(uint256 _sku) {
+        require(items[_sku].state == State.Shipped, "Not shipped");
         _;
     }
 
@@ -103,8 +110,17 @@ contract LemonadeStand {
         // Transfer money to seller
         payable(items[sku].seller).transfer(price);
 
+        if (msg.value > price) {
+            payable(msg.sender).transfer(msg.value - price);
+        }
+
         // Emit the appropriate event
         emit Sold(sku);
+    }
+
+    function shipItem(uint256 sku) public sold(sku) {
+        items[sku].state = State.Shipped;
+        emit Shipped(sku);
     }
 
     function fetchItem(uint256 _sku)
@@ -119,17 +135,16 @@ contract LemonadeStand {
             address buyer
         )
     {
-        uint256 state;
+        uint16 state;
         name = items[_sku].name;
         sku = items[_sku].sku;
         price = items[_sku].price;
-        state = uint256(items[_sku].state);
-
-        if (state == 0) {
+        state = uint16(items[_sku].state);
+        if (state == uint16(State.ForSale)) {
             stateIs = "For Sale";
-        }
-
-        if (state == 1) {
+        } else if (state == uint16(State.Shipped)) {
+            stateIs = "Shipped";
+        } else if (state == uint16(State.Sold)) {
             stateIs = "Sold";
         }
 

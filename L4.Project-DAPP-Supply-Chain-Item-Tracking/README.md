@@ -4,19 +4,19 @@
 
 ### UML Activity Diagram
 
-![UML Activity Diagram](diagrams/uml-activity.png)
+![UML Activity Diagram](docs/diagrams/uml-activity.png)
 
 ### UML Class Diagram
 
-![UML Activity Diagram](diagrams/uml-class.png)
+![UML Activity Diagram](docs/diagrams/uml-class.png)
 
 ### UML Sequence Diagram
 
-![UML Sequence Diagram](diagrams/uml-sequence.png)
+![UML Sequence Diagram](docs/diagrams/uml-sequence.png)
 
 ### UML State Diagram
 
-![UML State Diagram](diagrams/uml-state.png)
+![UML State Diagram](docs/diagrams/uml-state.png)
 
 ## Versions used
 
@@ -34,13 +34,13 @@ This repository containts an Ethereum DApp that demonstrates a Supply Chain flow
 
 The DApp User Interface when running should look like...
 
-![truffle test](req-docs/images/ftc_product_overview.png)
+![truffle test](docs/images/ftc_product_overview.png)
 
-![truffle test](req-docs/images/ftc_farm_details.png)
+![truffle test](docs/images/ftc_farm_details.png)
 
-![truffle test](req-docs/images/ftc_product_details.png)
+![truffle test](docs/images/ftc_product_details.png)
 
-![truffle test](req-docs/images/ftc_transaction_history.png)
+![truffle test](docs/images/ftc_transaction_history.png)
 
 ## Getting Started
 
@@ -81,7 +81,7 @@ ganache-cli -m "spirit supply whale amount human item harsh scare congress disco
 
 Your terminal should look something like this:
 
-![truffle test](req-docs/images/ganache-cli.png)
+![truffle test](docs/images/ganache-cli.png)
 
 In a separate terminal window, Compile smart contracts:
 
@@ -91,7 +91,7 @@ truffle compile
 
 Your terminal should look something like this:
 
-![truffle test](req-docs/images/truffle_compile.png)
+![truffle test](docs/images/truffle_compile.png)
 
 This will create the smart contract artifacts in folder `build\contracts`.
 
@@ -103,7 +103,7 @@ truffle migrate
 
 Your terminal should look something like this:
 
-![truffle test](req-docs/images/truffle_migrate.png)
+![truffle test](docs/images/truffle_migrate.png)
 
 Test smart contracts:
 
@@ -113,7 +113,7 @@ truffle test
 
 All 10 tests should pass.
 
-![truffle test](req-docs/images/truffle_test.png)
+![truffle test](docs/images/truffle_test.png)
 
 In a separate terminal window, launch the DApp:
 

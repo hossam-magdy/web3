@@ -1,0 +1,43 @@
+' http://www.plantuml.com/plantuml/uml/dL91JiCm4Bpt5Ru1XtwW1rG9XCGL-C3McSeMYHliTQN-dbWTuReaIENKzSpkp6QdswGIDG-zUSTNHh1OZHBLMpzAKFDqsE_HGYyI1yG6UlP9ezzbFRJu6rHyZtWb6L8k2cBL7qL1a_gcm_d7h1_PO3R6IJmYwQjYk7-OQnZZmIAbFnh4VYwpqdKakGoQRwjr6UEUqzWkdpZMONQG8Ef5gZcXefES7ob4jFM9iF17_F9YHxNvkJ6BQwCnH-iajKhjWhp9D4UDChU7MjSEDNPRX2uF_MfrnvKsviE1jR4I9iAODNDKOyycEqX8f9ZW75Mo8pxLFLH1gWItm9IRBb0QYw1aTGZbxwcdYQYnSVaBe7v1YVmMLPwLadnTwZ7QMpHvTMfQllwxupS0
+@startuml Sequence
+participant Coffee
+participant Farmer
+participant Distributor
+participant Retailer
+participant Consumer
+activate Coffee
+activate Farmer
+Farmer -> Coffee : harvestItem()
+Farmer -> Coffee : processItem()
+Farmer -> Coffee : packItem()
+Farmer -> Coffee : addItem()
+activate Distributor
+Distributor -> Farmer : buyItem()
+deactivate Distributor
+activate Retailer
+Farmer -> Retailer : shipItem()
+Retailer -> Farmer : receiveItem()
+deactivate Farmer
+activate Consumer
+Consumer -> Retailer : purchaseItem()
+deactivate Retailer
+Coffee -> Consumer : fetchItem()
+deactivate Consumer
+@enduml
+
+' Farmer: The Farmer can
+'   - harvest coffee beans
+'   - process coffee beans
+'   - pack coffee palettes
+'   - add coffee palettes
+'   - ship coffee palettes
+'   - track authenticity
+' Distributor: The Distributor can
+'   - buy coffee palettes
+'   - track authenticity
+' Retailer: The Retailer can
+'   - receive coffee palettes
+'   - track authenticity
+' Consumer: The consumer can
+'   - buy coffee palettes
+'   - track authenticity

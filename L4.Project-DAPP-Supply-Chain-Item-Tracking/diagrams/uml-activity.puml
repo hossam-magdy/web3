@@ -1,0 +1,35 @@
+' http://www.plantuml.com/plantuml/uml/dP4nReGm44Lxdy9TaY8NS9gD4aLA6-K2WvcLhO11dZ7IIXm-mp8u5Dc2RT3yUV3n_puHG-RIT_RLSvmYNypy0Rd7F9ihCYv0df3uax5_V7enRio3Hw8_3Vwd2cZRRPxV8t6EJU51p5nJBaBIGkeV78KurlU_a25srtr6Zt72Yjw6H6NzP2pP1w3ACBNc90_9OCo3NQsT_Gwei_MG15ZxR3MAzSFvZ6WRX4IADDM_I0BgNkOEcN534lS6MPBTG9mNGoWSC77qqhc0NLdhuNUBNG9fyOYhLggMczhvQT57FFKkrDEhklUClm00
+@startuml Activity
+|Farmer|
+start
+:harvestItem();
+:processItem();
+:packItem();
+:addItem();
+|Distributor|
+:buyIten();
+|Farmer|
+:shipItem();
+|Retailer|
+:receiveItem();
+|Consumer|
+:purchaseItem();
+end
+@enduml
+
+' Farmer: The Farmer can
+'   - harvest coffee beans
+'   - process coffee beans
+'   - pack coffee palettes
+'   - add coffee palettes
+'   - ship coffee palettes
+'   - track authenticity
+' Distributor: The Distributor can
+'   - buy coffee palettes
+'   - track authenticity
+' Retailer: The Retailer can
+'   - receive coffee palettes
+'   - track authenticity
+' Consumer: The consumer can
+'   - buy coffee palettes
+'   - track authenticity

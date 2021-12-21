@@ -1,0 +1,79 @@
+' http://www.plantuml.com/plantuml/uml/dPJDRjim3CVlUWgYbm43ScW-BZqCtJeKswreTnjsK2Hc5fROWKHt28Qz-_H1KuOn1t0luL-an1_fYBeFf3trfoEya2PK8Vt2pQFs9_Gte0CKUQk-l_y1A-z-DhJw84wsiBBTxpRw6-rVCT1NmfCQQOa_T8S3Oa7DijPtuCANSXgjC2RmjM8hoS--CnX2XhDU3jya-5CvBV3r5BvHR2jScr-5p68PTfknyQWmDrFcLh6LpDhQZ6HxZVZP1V9ktrFd4-cZjGBQ2cYyIusq9Dxtbmnakwp5NG9_wlg86YUVjhbJR2LxQDmvOrbSvJuZQNV4tELBt7-MFdT2aarg49BHeq7tYXbNzVLE7xesz4Elm-8s5V1SCjZAaH9adn9LxrBlJQD3gQ8kbfV1i_J4AUoODIrahKG9ve1acbm5gxaIwb796zyBAQtiXRoPovF3y4T1sWpnJ1rwg3e5wa22w1pWaG4MoLNkDXIR77pdW4Lo3JS31fMSycy1IqR8rmFHEV2Olabsim9k-w-wnzRsfwDIwXrVwplurY1hCBgD0O3Ly622ALzeZxeD7E8dxB-Xs2pxepuY4GuXRUrC94tFJ8XyIgXxQh0bPnnTOg3EA1TV7QCEqfkm9AlCPqefgvflcC0bEVdsSKx3gxVM-0y0
+@startuml State
+state "Farmer" as Farmer1
+[*] -right-> Farmer1
+Farmer1 -down-> harvestItem
+harvestItem -down-> CoffeeState
+
+state "Farmer" as Farmer2: isHarvested
+Farmer1 -right-> Farmer2
+Farmer2 -down-> processItem
+processItem -down-> CoffeeState
+
+state "Farmer" as Farmer3: isProcessed
+Farmer2 -right-> Farmer3
+Farmer3 -down-> packItem
+packItem -down-> CoffeeState
+
+state "Farmer" as Farmer4: isPacked
+Farmer3 -right-> Farmer4
+Farmer4 -down-> addItem
+addItem -down-> CoffeeState
+
+state Distributor: isAdded
+Farmer4 -right-> Distributor
+Distributor -down-> buyItem
+buyItem -down-> CoffeeState
+
+state "Farmer" as Farmer5: isBought
+Distributor -right-> Farmer5
+Farmer5 -down-> shipItem
+shipItem -down-> CoffeeState
+
+state Retailer: isShipped
+Farmer5 -right-> Retailer
+Retailer -down-> receiveItem
+receiveItem -down-> CoffeeState
+
+state "Consumer" as Consumer1: isReceived
+Retailer -right-> Consumer1
+Consumer1 -down-> purchaseItem
+purchaseItem -down-> CoffeeState
+
+state "Consumer" as Consumer2: isPurchased
+Consumer1 -right-> Consumer2
+Consumer2 -down-> fetchItem
+fetchItem -down-> CoffeeState
+
+Consumer2 -right-> [*]
+
+state "Coffee State" as CoffeeState {
+  [*] -> Harvested
+  Harvested -> Processed
+  Processed -> Packed
+  Packed -> Added
+  Added -> Bought
+  Bought -> Shipped
+  Shipped -> Received
+  Received -> Purchased
+  Purchased -> Fetched
+  Fetched -> [*]
+}
+@enduml
+
+' Farmer: The Farmer can
+'   - harvest coffee beans
+'   - process coffee beans
+'   - pack coffee palettes
+'   - add coffee palettes
+'   - ship coffee palettes
+'   - track authenticity
+' Distributor: The Distributor can
+'   - buy coffee palettes
+'   - track authenticity
+' Retailer: The Retailer can
+'   - receive coffee palettes
+'   - track authenticity
+' Consumer: The consumer can
+'   - buy coffee palettes
+'   - track authenticity

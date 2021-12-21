@@ -1,10 +1,23 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.0;
 
+import "../coffeeaccesscontrol/ConsumerRole.sol";
+import "../coffeeaccesscontrol/DistributorRole.sol";
+import "../coffeeaccesscontrol/FarmerRole.sol";
+import "../coffeeaccesscontrol/RetailerRole.sol";
+import "../coffeecore/Ownable.sol";
+
 // Define a contract 'Supplychain'
-contract SupplyChain {
-    // Define 'owner'
-    address owner;
+contract SupplyChain is
+    ConsumerRole,
+    DistributorRole,
+    FarmerRole,
+    RetailerRole,
+    Ownable
+{
+    // Already provided via "Ownable" contract
+    // // Define 'owner'
+    // address owner;
 
     // Define a variable called 'upc' for Universal Product Code (UPC)
     uint256 upc;
@@ -62,11 +75,12 @@ contract SupplyChain {
     event Received(uint256 upc);
     event Purchased(uint256 upc);
 
-    // Define a modifer that checks to see if msg.sender == owner of the contract
-    modifier onlyOwner() {
-        require(msg.sender == owner);
-        _;
-    }
+    // Already provided via "Ownable" contract
+    // // Define a modifer that checks to see if msg.sender == owner of the contract
+    // modifier onlyOwner() {
+    //     require(msg.sender == owner);
+    //     _;
+    // }
 
     // Define a modifer that verifies the Caller
     modifier verifyCaller(address _address) {
@@ -133,16 +147,17 @@ contract SupplyChain {
     // and set 'sku' to 1
     // and set 'upc' to 1
     constructor() payable {
-        owner = msg.sender;
+        // Already provided via "Ownable" contract, in its constructor
+        // owner = msg.sender;
         sku = 1;
         upc = 1;
     }
 
     // Define a function 'kill' if required
-    function kill() public {
-        if (msg.sender == owner) {
-            selfdestruct(payable(owner));
-        }
+    function kill() public onlyOwner {
+        // if (msg.sender == owner) {
+        selfdestruct(payable(owner()));
+        // }
     }
 
     // Define a function 'harvestItem' that allows a farmer to mark an item 'Harvested'

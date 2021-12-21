@@ -1,0 +1,104 @@
+' http://www.plantuml.com/plantuml/uml/XPN1Yjim48RlUGeT4sWkXVPIA4kpNHeecvAKNXT57iSYicH6Ka9O-kwLivxk62dEPKd-xqVvDDRA3pv83B4rirtiEdDPDL9RiOpTyglOdAtS6oYG9uajuDOLuQFs0VK-1dUhiOKWjO5RUEMiZxJ-J1dflU2jrvaGosNwqxfArnfGE6ikoHPmlk3n2L3NbvKq9X5PLGXffPVXmwZPILrzjouUcddKDdpyz5cyTAWLZ5gg0NNy8qs4zrRirAZJI3o13r3ThdJeL1AOh4XrdEArmvqq4nhUcMg2DhhhfjP7KA1FauOHLIEpJT2ZWHFO87vam-WxN_xpNsmIHSx6aC4dDeESxcW01SHsdzCjttf1YUsRSTft7QqAsbaw1-i0xJmrFWY7-g3jst_E-f5_VvOjyEzhMpjiPRyCZt-c9CGAHfcpXo7iq5LHXMSNm2-O2HstgyaOfEdcgGTZydGVBuLg6cIMqjd90HsPdDGGLDF7ts9T0suip1SYtGHzDD7xVNRbtb4RatxXBzqUmqqcNczS6jdJSqFE8kqtUOXWNVeCLzIFOum3IkkJw3kcMyZ2-HeoIRfKIvwh7XPDjHyGhIoLIafXv94OQms__vOKjpEKcHoxrCk6h52qvFoEAgyoNnONfHddvlnbasiJBJeJl2VCUsHBML6L8FVaRxtSasZHa-0zJzuZJygAdWCSF6SFOAlOcdy0
+@startuml Class
+SupplyChain -up-> Ownable
+SupplyChain -up-> FarmerRole
+SupplyChain -up-> DistributorRole
+SupplyChain -up-> RetailerRole
+SupplyChain -up-> ConsumerRole
+
+class SupplyChain {
+  --
+  modifier onlyOwner()
+  modifier verifyCaller(address _address)
+  modifier paidEnough(uint256 _price)
+  modifier checkValue(uint256 _upc)
+  modifier harvested(uint256 _upc)
+  modifier processed(uint256 _upc)
+  modifier packed(uint256 _upc)
+  modifier forSale(uint256 _upc)
+  modifier sold(uint256 _upc)
+  modifier shipped(uint256 _upc)
+  modifier received(uint256 _upc)
+  modifier purchased(uint256 _upc)
+  --
+  event Harvested(uint256 upc);
+  event Processed(uint256 upc);
+  event Packed(uint256 upc);
+  event ForSale(uint256 upc);
+  event Sold(uint256 upc);
+  event Shipped(uint256 upc);
+  event Received(uint256 upc);
+  event Purchased(uint256 upc);
+  --
+  function harvestItem(upc, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude, productNotes)
+  function processItem()
+  function packItem()
+  function sellItem()
+  function buyItem()
+  function shipItem()
+  function receiveItem()
+  function purchaseItem()
+  function fetchItemBufferOne() -> Item
+  function fetchItemBufferTwo() -> Item
+  function kill()
+}
+
+class Ownable {
+  modifier onlyOwner()
+  --
+  function owner()
+  function isOwner()
+  function renounceOwnership()
+  function transferOwnership(address newOwner)
+}
+
+class FarmerRole {
+  modifier onlyCFarmer()
+  --
+  function isFarmer(address account)
+  function addFarmer(address newFarmer)
+  function renounceFarmer()
+}
+
+class DistributorRole {
+  modifier onlyDistributor()
+  --
+  function isDistributor(address account)
+  function addDistributor(address newDistributor)
+  function renounceDistributor()
+}
+
+class RetailerRole {
+  modifier onlyRetailer()
+  --
+  function isRetailer(address account)
+  function addRetailer(address newRetailer)
+  function renounceRetailer()
+}
+
+class ConsumerRole {
+  modifier onlyConsumer()
+  --
+  function isConsumer(address account)
+  function addConsumer(address newConsumer)
+  function renounceConsumer()
+}
+
+@enduml
+
+' Farmer: The Farmer can
+'   - harvest coffee beans
+'   - process coffee beans
+'   - pack coffee palettes
+'   - add coffee palettes
+'   - ship coffee palettes
+'   - track authenticity
+' Distributor: The Distributor can
+'   - buy coffee palettes
+'   - track authenticity
+' Retailer: The Retailer can
+'   - receive coffee palettes
+'   - track authenticity
+' Consumer: The consumer can
+'   - buy coffee palettes
+'   - track authenticity

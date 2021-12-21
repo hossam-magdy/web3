@@ -194,7 +194,7 @@ contract SupplyChain is
         emit Harvested(item.upc);
     }
 
-    // Define a function 'processtItem' that allows a farmer to mark an item 'Processed'
+    // Define a function 'processItem' that allows a farmer to mark an item 'Processed'
     function processItem(uint256 _upc)
         public
         /// Call modifier to check if upc has passed previous supply chain stage

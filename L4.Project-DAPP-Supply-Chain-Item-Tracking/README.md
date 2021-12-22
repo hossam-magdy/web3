@@ -25,6 +25,25 @@
 - Node v14.18.1
 - Web3.js v1.5.3
 
+## Hashes and addresses
+
+- Contract address: [`0x82D6D90178dcEFC5f895DF798BC5C3b1489E09a8`](https://rinkeby.etherscan.io/address/0x82d6d90178dcefc5f895df798bc5c3b1489e09a8)
+- Deployment Tx: [`0x2bba5f7492809f18bc565240861af44d0f910b102910a2a5df7968e49de5299c`](https://rinkeby.etherscan.io/tx/0x2bba5f7492809f18bc565240861af44d0f910b102910a2a5df7968e49de5299c)
+- UI is deployed on IPFS: https://ipfs.io/ipfs/QmY6CorcYgdN9GPdoW1x47bYfyRw5pWr75grL6ZYJGprbL
+- Transaction History:
+  - Harvested - [`0xb22c3fed6ba47c3a6473272aecb0f9fa2b8bf685d5f1bbf98369f8856aebe2f4`](https://rinkeby.etherscan.io/tx/0xb22c3fed6ba47c3a6473272aecb0f9fa2b8bf685d5f1bbf98369f8856aebe2f4)
+  - Processed - [`0x0f44d4ee6c085397e5ebb1625835d4614f897e509a493575bd34788638af2feb`](https://rinkeby.etherscan.io/tx/0x0f44d4ee6c085397e5ebb1625835d4614f897e509a493575bd34788638af2feb)
+  - Packed - [`0x3b0316450a1011e157f0b1e0a106ab862ef01267be44f2f73ca627cdef720d3b`](https://rinkeby.etherscan.io/tx/0x3b0316450a1011e157f0b1e0a106ab862ef01267be44f2f73ca627cdef720d3b)
+  - ForSale - [`0xbc39235bec5bff82cd26e43cfa8621fb6e06a00fb0a430857ea19c1132dea3b4`](https://rinkeby.etherscan.io/tx/0xbc39235bec5bff82cd26e43cfa8621fb6e06a00fb0a430857ea19c1132dea3b4)
+  - Sold - [`0x203af880a2b2aa47891487176dadb74de0787dd4c0b06ef1160d538f15cce37c`](https://rinkeby.etherscan.io/tx/0x203af880a2b2aa47891487176dadb74de0787dd4c0b06ef1160d538f15cce37c)
+  - Shipped - [`0x6d04a45d57089d037efba296e6bcd1d9386f0e44dd8adfea23114b4e0ab23cc2`](https://rinkeby.etherscan.io/tx/0x6d04a45d57089d037efba296e6bcd1d9386f0e44dd8adfea23114b4e0ab23cc2)
+  - Received - [`0x80c5be2d0367911def1c206c6f7f4ddf1d5948e023de5d1bf99057d9ff044fd5`](https://rinkeby.etherscan.io/tx/0x80c5be2d0367911def1c206c6f7f4ddf1d5948e023de5d1bf99057d9ff044fd5)
+  - Purchased - [`0x178d0cacb9c023eda2e240136bc3546e2e13abc951fa16d906fdf816a5447f27`](https://rinkeby.etherscan.io/tx/0x178d0cacb9c023eda2e240136bc3546e2e13abc951fa16d906fdf816a5447f27)
+
+![Transaction History](docs/screenshot-tx-history.png)
+
+![Full Screenshot](docs/screenshot-full.png)
+
 <details>
 <summary>Expand/Collapse starter code README</summary>
 

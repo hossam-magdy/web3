@@ -68,10 +68,10 @@ App = {
           null,
           2
         );
-        console.log(logKey, result);
+        console.log(`[${logKey}]`, result);
       })
       .catch((err) => {
-        console.log(err.message);
+        console.error(`[${logKey}]`, err.message);
       });
   },
 
@@ -142,11 +142,6 @@ App = {
           Artifact: artifact,
           Instance: App.contracts.SupplyChain,
         });
-        // App.contracts.SupplyChain.deployed = () =>
-        //   Promise.resolve(App.contracts.SupplyChain.methods);
-
-        // App.contracts.SupplyChain = TruffleContract(artifact);
-        App.contracts.SupplyChain.setProvider(App.web3Provider);
 
         App.fetchItemBufferOne();
         App.fetchItemBufferTwo();

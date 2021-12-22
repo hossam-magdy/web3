@@ -200,7 +200,7 @@ contract SupplyChain is
         /// Call modifier to check if upc has passed previous supply chain stage
         harvested(_upc)
         /// Call modifier to verify caller of this function
-        onlyFarmer
+        verifyCaller(items[_upc].ownerID)
     {
         // Update the appropriate fields
         items[_upc].itemState = State.Processed;
@@ -246,7 +246,7 @@ contract SupplyChain is
     function buyItem(uint256 _upc)
         public
         payable
-        //// onlyDistributor // anyone can buy, and will be marked as the consumer of the product
+        onlyDistributor
         /// Call modifier to check if upc has passed previous supply chain stage
         forSale(_upc)
         /// Call modifer to check if buyer has paid enough
@@ -254,9 +254,6 @@ contract SupplyChain is
         /// Call modifer to send any excess ether back to buyer
         checkValue(_upc)
     {
-        // !TODO!: when should the consumerID be set?
-        // !TODO!: should the "checkValue" modifer return to consumerID or ownerID or distributorID?
-
         // Update the appropriate fields - ownerID, distributorID, itemState
         items[_upc].itemState = State.Sold;
         items[_upc].distributorID = msg.sender;

@@ -27,18 +27,18 @@
 
 ## Hashes and addresses
 
-- Contract address: [`0x82D6D90178dcEFC5f895DF798BC5C3b1489E09a8`](https://rinkeby.etherscan.io/address/0x82d6d90178dcefc5f895df798bc5c3b1489e09a8)
-- Deployment Tx: [`0x2bba5f7492809f18bc565240861af44d0f910b102910a2a5df7968e49de5299c`](https://rinkeby.etherscan.io/tx/0x2bba5f7492809f18bc565240861af44d0f910b102910a2a5df7968e49de5299c)
-- UI is deployed on IPFS: https://ipfs.io/ipfs/QmY6CorcYgdN9GPdoW1x47bYfyRw5pWr75grL6ZYJGprbL
+- Contract address: [`0x7cA764c0E996BAcF876d2d07728e641f8BE4f799`](https://rinkeby.etherscan.io/address/0x7cA764c0E996BAcF876d2d07728e641f8BE4f799)
+- Deployment Tx: [`0x8e9b8e43075c74dcd623f1fa814108298a7863bceefe8dcafe512e9be773955e`](https://rinkeby.etherscan.io/tx/0x8e9b8e43075c74dcd623f1fa814108298a7863bceefe8dcafe512e9be773955e)
+- UI is deployed on IPFS: https://ipfs.io/ipfs/QmYAPGWVRLSUx5imWybnEwkFaRz4Q43yXm6zjyeuimjaSR
 - Transaction History:
-  - Harvested - [`0xb22c3fed6ba47c3a6473272aecb0f9fa2b8bf685d5f1bbf98369f8856aebe2f4`](https://rinkeby.etherscan.io/tx/0xb22c3fed6ba47c3a6473272aecb0f9fa2b8bf685d5f1bbf98369f8856aebe2f4)
-  - Processed - [`0x0f44d4ee6c085397e5ebb1625835d4614f897e509a493575bd34788638af2feb`](https://rinkeby.etherscan.io/tx/0x0f44d4ee6c085397e5ebb1625835d4614f897e509a493575bd34788638af2feb)
-  - Packed - [`0x3b0316450a1011e157f0b1e0a106ab862ef01267be44f2f73ca627cdef720d3b`](https://rinkeby.etherscan.io/tx/0x3b0316450a1011e157f0b1e0a106ab862ef01267be44f2f73ca627cdef720d3b)
-  - ForSale - [`0xbc39235bec5bff82cd26e43cfa8621fb6e06a00fb0a430857ea19c1132dea3b4`](https://rinkeby.etherscan.io/tx/0xbc39235bec5bff82cd26e43cfa8621fb6e06a00fb0a430857ea19c1132dea3b4)
-  - Sold - [`0x203af880a2b2aa47891487176dadb74de0787dd4c0b06ef1160d538f15cce37c`](https://rinkeby.etherscan.io/tx/0x203af880a2b2aa47891487176dadb74de0787dd4c0b06ef1160d538f15cce37c)
-  - Shipped - [`0x6d04a45d57089d037efba296e6bcd1d9386f0e44dd8adfea23114b4e0ab23cc2`](https://rinkeby.etherscan.io/tx/0x6d04a45d57089d037efba296e6bcd1d9386f0e44dd8adfea23114b4e0ab23cc2)
-  - Received - [`0x80c5be2d0367911def1c206c6f7f4ddf1d5948e023de5d1bf99057d9ff044fd5`](https://rinkeby.etherscan.io/tx/0x80c5be2d0367911def1c206c6f7f4ddf1d5948e023de5d1bf99057d9ff044fd5)
-  - Purchased - [`0x178d0cacb9c023eda2e240136bc3546e2e13abc951fa16d906fdf816a5447f27`](https://rinkeby.etherscan.io/tx/0x178d0cacb9c023eda2e240136bc3546e2e13abc951fa16d906fdf816a5447f27)
+  - Harvested - [`0x1f4c6ec5bb79b53ea55546d1fa6cc6dd6e76ab3ecbf7b25af204530d840c759f`](https://rinkeby.etherscan.io/tx/0x1f4c6ec5bb79b53ea55546d1fa6cc6dd6e76ab3ecbf7b25af204530d840c759f)
+  - Processed - [`0xe1bd5474113ee0a4d7922db2c6d620ec55219e163dfc2030621a98d53f3e6561`](https://rinkeby.etherscan.io/tx/0xe1bd5474113ee0a4d7922db2c6d620ec55219e163dfc2030621a98d53f3e6561)
+  - Packed - [`0x1361e9e2c3f451a1a542f1281287924b49aa0a0702bd3c8bbe57346882eede62`](https://rinkeby.etherscan.io/tx/0x1361e9e2c3f451a1a542f1281287924b49aa0a0702bd3c8bbe57346882eede62)
+  - ForSale - [`0x949d5e023d4b8969fbe48871af17ac681add30d24e749bffbc6f8e1cbdbe6adc`](https://rinkeby.etherscan.io/tx/0x949d5e023d4b8969fbe48871af17ac681add30d24e749bffbc6f8e1cbdbe6adc)
+  - Sold - [`0x6bf374100a20e9a010e7df4135b7ea6f3dc2b506a3a44ab35d4c213994722a8b`](https://rinkeby.etherscan.io/tx/0x6bf374100a20e9a010e7df4135b7ea6f3dc2b506a3a44ab35d4c213994722a8b)
+  - Shipped - [`0xf5a306e8cb58a5cb12468f35ec05b569e169950ed2e7d174854e99765c84dc4b`](https://rinkeby.etherscan.io/tx/0xf5a306e8cb58a5cb12468f35ec05b569e169950ed2e7d174854e99765c84dc4b)
+  - Received - [`0xc31f34d961bdf93e2fbe629020249fdda419c66635f968154366a4c9617cfa21`](https://rinkeby.etherscan.io/tx/0xc31f34d961bdf93e2fbe629020249fdda419c66635f968154366a4c9617cfa21)
+  - Purchased - [`0xced5ab61aeb3a47e30d2d2850fb4bb19a37163648cf2c0a83befcd6c07ab9365`](https://rinkeby.etherscan.io/tx/0xced5ab61aeb3a47e30d2d2850fb4bb19a37163648cf2c0a83befcd6c07ab9365)
 
 ![Transaction History](docs/screenshot-tx-history.png)
 

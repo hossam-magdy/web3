@@ -162,6 +162,7 @@ App = {
     App.getMetaskAccountID();
     const processId = parseInt(event.target.getAttribute('data-id'));
     console.log('ButtonClicked - processId: ', processId);
+    App.readForm();
     switch (processId) {
       case 1:
         return await App.harvestItem(event);
@@ -218,18 +219,19 @@ App = {
   },
 
   sellItem: () => {
-    const productPrice = web3.utils.toWei('1', 'ether');
-    console.log('productPrice', productPrice);
+    const productPrice = web3.utils.toWei(App.productPrice, 'ether');
+    console.log('productPrice', App.productPrice, 'ether, ', productPrice);
     App.handleCallResult(
-      App.contracts.SupplyChain.methods
-        .sellItem(App.upc, App.productPrice)
-        .send(),
+      App.contracts.SupplyChain.methods.sellItem(App.upc, productPrice).send(),
       'sellItem'
     );
   },
 
   buyItem: () => {
-    const walletValue = web3.utils.toWei('3', 'ether');
+    const walletValue = web3.utils.toWei(
+      (App.productPrice * 1.5).toString(),
+      'ether'
+    );
     App.handleCallResult(
       App.contracts.SupplyChain.methods
         .buyItem(App.upc)

@@ -266,7 +266,7 @@ contract('SupplyChain', async (accounts) => {
     await supplyChain.packItem(upc);
     await supplyChain.sellItem(upc, productPrice);
     const buyResult = await supplyChain.buyItem(upc, {
-      from: consumerID,
+      from: distributorID,
       value: productPrice,
     });
 
@@ -280,7 +280,11 @@ contract('SupplyChain', async (accounts) => {
       'Sold',
       (args) => args.upc.toNumber() === upc
     );
-    assertBufferOneResult(bufferOneResult, { ownerID: consumerID, sku, upc });
+    assertBufferOneResult(bufferOneResult, {
+      ownerID: distributorID,
+      sku,
+      upc,
+    });
     assertBufferTwoResult(bufferTwoResult, {
       itemState: STATE.Sold,
       productPrice,
@@ -293,7 +297,10 @@ contract('SupplyChain', async (accounts) => {
     await supplyChain.processItem(upc);
     await supplyChain.packItem(upc);
     await supplyChain.sellItem(upc, productPrice);
-    await supplyChain.buyItem(upc, { from: consumerID, value: productPrice });
+    await supplyChain.buyItem(upc, {
+      from: distributorID,
+      value: productPrice,
+    });
     const shipResult = await supplyChain.shipItem(upc);
 
     // Retrieve the just now saved item from blockchain by calling function fetchItem()
@@ -306,7 +313,11 @@ contract('SupplyChain', async (accounts) => {
       'Shipped',
       (args) => args.upc.toNumber() === upc
     );
-    assertBufferOneResult(bufferOneResult, { ownerID: consumerID, sku, upc });
+    assertBufferOneResult(bufferOneResult, {
+      ownerID: distributorID,
+      sku,
+      upc,
+    });
     assertBufferTwoResult(bufferTwoResult, {
       itemState: STATE.Shipped,
       productPrice,
@@ -319,7 +330,10 @@ contract('SupplyChain', async (accounts) => {
     await supplyChain.processItem(upc);
     await supplyChain.packItem(upc);
     await supplyChain.sellItem(upc, productPrice);
-    await supplyChain.buyItem(upc, { from: consumerID, value: productPrice });
+    await supplyChain.buyItem(upc, {
+      from: distributorID,
+      value: productPrice,
+    });
     await supplyChain.shipItem(upc);
     const receiveResult = await supplyChain.receiveItem(upc);
 
@@ -346,7 +360,10 @@ contract('SupplyChain', async (accounts) => {
     await supplyChain.processItem(upc);
     await supplyChain.packItem(upc);
     await supplyChain.sellItem(upc, productPrice);
-    await supplyChain.buyItem(upc, { from: consumerID, value: productPrice });
+    await supplyChain.buyItem(upc, {
+      from: distributorID,
+      value: productPrice,
+    });
     await supplyChain.shipItem(upc);
     await supplyChain.receiveItem(upc);
     const purchaseResult = await supplyChain.purchaseItem(upc, {

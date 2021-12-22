@@ -27,7 +27,7 @@
             <input type="number" id="upc" name="upc" value=1><br>
             Current Owner ID
             <br>
-            <input type="text" id="ownerID" name="ownerID" value="0x963865f57804b38459dd4b2da2f760211a200438"
+            <input type="text" id="ownerID" name="ownerID" value="0x6c0ebe2a2cdbea429fd3719f56fb57d7719396f7"
                 size="50"><br>
             <div class=button-div>
                 <button class="btn-fetchOne" id="button" type="button" data-id="9">Fetch Data 1</button>
@@ -40,7 +40,7 @@
             Farmer ID
             <br>
             <input type="text" id="originFarmerID" name="originFarmerID"
-                value="0x99c289eb2aacec289631a5ddf62cf27a63d4494f" size="50"><br>
+                value="0xcedbf6b6f39e7ab84df5d7d881e08d8ed8918aa4" size="50"><br>
             Farm Name
             <br>
             <input type="text" id="originFarmName" name="originFarmName" value="John Doe"><br>
@@ -71,15 +71,15 @@
             Distributor ID
             <br>
             <input type="text" id="distributorID" name="distributorID"
-                value="0xf1b1bcd24dad92303dd9fe78be639f7bcf9c238d" size="50">
+                value="0xecc93d9486493ed1022298d1f43305ab85b1ea70" size="50">
             <br>
             Retailer ID
             <br>
-            <input type="text" id="retailerID" name="retailerID" value="0x0fb2bfefd526966c87efa19f6693d50971763fc2"
+            <input type="text" id="retailerID" name="retailerID" value="0xb18315b66fe92ddfca9ee612eac49ea8892fc921"
                 size="50"><br>
             Distributor ID
             <br>
-            <input type="text" id="consumerID" name="consumerID" value="0x5d777e9127b28fb119e81a6304278a0a21bef1c4"
+            <input type="text" id="consumerID" name="consumerID" value="0xc6be1fc5561b17f70dc78d78451f1a4b6b6d44a0"
                 size="50"><br>
             <br>
             <button class="btn-buy" id="button" type="button" data-id="5">Buy</button>
@@ -91,7 +91,7 @@
         <hr>
     </div>
 
-    <h2>Transaction History<span id="ftc-history"></span></h2>
+    <h2>Transaction History</h2>
     <div>
         <ul id="ftc-events">
             <!-- Events will appear here from app.js -->
@@ -100,9 +100,10 @@
         <hr>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- <script src="js/web3.min.js"></script> -->
-    <script src="js/truffle-contract.js"></script>
+    <h2>Last Call/Transaction Output</h2>
+    <pre id="ftc-item"></pre>
+
+    <script src="js/web3.min.js"></script>
     <script src="js/app.js"></script>
 </body>
 

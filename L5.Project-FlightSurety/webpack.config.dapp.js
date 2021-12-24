@@ -1,8 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
-  entry: ['babel-polyfill', path.join(__dirname, 'src/dapp')],
+  entry: [path.join(__dirname, 'src/dapp')],
   output: {
     path: path.join(__dirname, 'prod/dapp'),
     filename: 'bundle.js',
@@ -10,26 +11,27 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx)$/i,
         use: 'babel-loader',
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/,
+        test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.(png|svg|jpg|gif)$/i,
         use: ['file-loader'],
       },
       {
-        test: /\.html$/,
+        test: /\.html$/i,
         use: 'html-loader',
         exclude: /node_modules/,
       },
     ],
   },
   plugins: [
+    new NodePolyfillPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src/dapp/index.html'),
     }),
@@ -38,8 +40,8 @@ module.exports = {
     extensions: ['.js'],
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dapp'),
+    static: { directory: path.join(__dirname, 'dapp') },
     port: 8000,
-    stats: 'minimal',
   },
+  stats: 'minimal',
 };

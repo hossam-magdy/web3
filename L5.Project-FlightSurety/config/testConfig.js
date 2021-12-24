@@ -1,6 +1,5 @@
 var FlightSuretyApp = artifacts.require('FlightSuretyApp');
 var FlightSuretyData = artifacts.require('FlightSuretyData');
-var BigNumber = require('bignumber.js');
 
 var Config = async function (accounts) {
   // These test addresses are useful when you need to add
@@ -26,7 +25,7 @@ var Config = async function (accounts) {
   return {
     owner: owner,
     firstAirline: firstAirline,
-    weiMultiple: new BigNumber(10).pow(18),
+    weiMultiple: web3.utils.toBN(10).pow(18),
     testAddresses: testAddresses,
     flightSuretyData: flightSuretyData,
     flightSuretyApp: flightSuretyApp,

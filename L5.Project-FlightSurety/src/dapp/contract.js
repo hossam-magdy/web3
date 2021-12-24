@@ -1,5 +1,5 @@
 import FlightSuretyApp from '../../build/contracts/FlightSuretyApp.json';
-import Config from './config.json';
+import Config from '../config.json';
 import Web3 from 'web3';
 
 export default class Contract {
@@ -17,7 +17,7 @@ export default class Contract {
   }
 
   initialize(callback) {
-    this.web3.eth.getAccounts((error, accts) => {
+    this.web3.eth.getAccounts((accts) => {
       this.owner = accts[0];
 
       let counter = 1;

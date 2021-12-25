@@ -4,7 +4,7 @@ import Web3 from 'web3';
 
 export default class Contract {
   constructor(network, callback) {
-    let config = Config[network];
+    const config = Config[network];
     this.web3 = new Web3(new Web3.providers.HttpProvider(config.url));
     this.flightSuretyApp = new this.web3.eth.Contract(
       FlightSuretyApp.abi,
@@ -16,22 +16,18 @@ export default class Contract {
     this.passengers = [];
   }
 
-  initialize(callback) {
-    this.web3.eth.getAccounts((accts) => {
-      this.owner = accts[0];
-
-      let counter = 1;
-
-      while (this.airlines.length < 5) {
-        this.airlines.push(accts[counter++]);
-      }
-
-      while (this.passengers.length < 5) {
-        this.passengers.push(accts[counter++]);
-      }
-
-      callback();
-    });
+  async initialize(callback) {
+    const accts = await this.web3.eth.getAccounts();
+    this.owner = accts[0];
+    let counter = 1;
+    while (this.airlines.length < 5) {
+      this.airlines.push(accts[counter++]);
+    }
+    while (this.passengers.length < 5) {
+      this.passengers.push(accts[counter++]);
+    }
+    // console.log(this.airlines, this.passengers);
+    callback();
   }
 
   isOperational(callback) {
@@ -41,17 +37,32 @@ export default class Contract {
       .call({ from: self.owner }, callback);
   }
 
-  fetchFlightStatus(flight, callback) {
-    let self = this;
-    let payload = {
-      airline: self.airlines[0],
-      flight: flight,
+  fetchFlightStatus(flight, airline, callback) {
+    const self = this;
+    const payload = {
+      airline,
+      flight,
       timestamp: Math.floor(Date.now() / 1000),
     };
+    console.log('starting [fetchFlightStatus]', payload);
     self.flightSuretyApp.methods
       .fetchFlightStatus(payload.airline, payload.flight, payload.timestamp)
       .send({ from: self.owner }, (error, result) => {
         callback(error, payload);
       });
+  }
+
+  onNextFlightStatusInfo(cb) {
+    const self = this;
+    // TODO: listen to FlightStatusInfo
+    // myContract.once('MyEvent', {});
+    // self.flightSuretyApp.once('FlightStatusInfo', {filter:{}}, () => {});
+    self.flightSuretyApp.events.FlightStatusInfo(
+      { filter: {} },
+      (_err, { returnValues }) => {
+        console.log('[event:FlightStatusInfo]', returnValues);
+        cb(returnValues);
+      }
+    );
   }
 }

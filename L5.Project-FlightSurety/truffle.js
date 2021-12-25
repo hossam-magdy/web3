@@ -10,17 +10,21 @@ const mnemonic =
 
 const url = 'http://127.0.0.1:8545/';
 
+const noOfAccounts = 30; // 1 owner, 5 airlines, 5 passengers, rest are/can be oracles
+
 module.exports = {
   networks: {
     development: {
-      provider: () =>
-        new HDWalletProvider({ mnemonic, url, numberOfAddresses: 50 }),
-      network_id: '*',
+      provider: () => new HDWalletProvider({ mnemonic, url }),
+      network_id: '*', // Match any network id
+      // host: '127.0.0.1',
+      // port: 8545,
       // gas: 9999999,
     },
-  },
-  develop: {
-    port: 8545,
+    develop: {
+      port: 8545,
+      accounts: noOfAccounts + 1, // not counting the first/owner
+    },
   },
   compilers: {
     solc: {

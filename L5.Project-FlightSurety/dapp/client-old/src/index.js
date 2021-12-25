@@ -1,5 +1,5 @@
-import DOM from './dom';
-import Contract from './contract';
+import DOM from './dom.js';
+import Contract from './contract.js';
 import './flightsurety.css';
 
 const display = (title, description, results) => {

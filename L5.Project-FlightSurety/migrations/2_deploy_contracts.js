@@ -14,8 +14,8 @@ module.exports = (deployer) => {
         },
       };
       fs.writeFileSync(
-        __dirname + '/../src/config.json',
-        JSON.stringify(config, null, '\t'),
+        __dirname + '/../build/deployedConfig.json',
+        JSON.stringify(config, null, 2),
         'utf-8'
       );
     });

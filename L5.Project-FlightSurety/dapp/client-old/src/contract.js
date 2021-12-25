@@ -1,6 +1,6 @@
-import FlightSuretyApp from '../../build/contracts/FlightSuretyApp.json';
-import Config from '../config.json';
 import Web3 from 'web3';
+import FlightSuretyApp from '../../../build/contracts/FlightSuretyApp.json';
+import Config from '../../../build/deployedConfig.json';
 
 export default class Contract {
   constructor(network, callback) {
@@ -59,8 +59,9 @@ export default class Contract {
     // self.flightSuretyApp.once('FlightStatusInfo', {filter:{}}, () => {});
     self.flightSuretyApp.events.FlightStatusInfo(
       { filter: {} },
-      (_err, { returnValues }) => {
-        console.log('[event:FlightStatusInfo]', returnValues);
+      (error, event) => {
+        const { returnValues } = event || {};
+        console.log('[event:FlightStatusInfo]', { error, event });
         cb(returnValues);
       }
     );

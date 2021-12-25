@@ -3,9 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
-  entry: [path.join(__dirname, 'src/dapp')],
+  entry: [path.join(__dirname, 'src')],
   output: {
-    path: path.join(__dirname, 'prod/dapp'),
+    path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
   },
   module: {
@@ -33,14 +33,14 @@ module.exports = {
   plugins: [
     new NodePolyfillPlugin(),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src/dapp/index.html'),
+      template: path.join(__dirname, 'src/index.html'),
     }),
   ],
   resolve: {
     extensions: ['.js'],
   },
   devServer: {
-    static: { directory: path.join(__dirname, 'dapp') },
+    static: { directory: path.join(__dirname, 'src') },
     port: 8000,
   },
   stats: 'minimal',

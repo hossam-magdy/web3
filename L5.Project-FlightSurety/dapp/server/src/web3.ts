@@ -1,6 +1,6 @@
 import Web3 from 'web3';
-import { abi as FlightSuretyAppABI } from '../../../build/contracts/FlightSuretyApp.json';
-import { localhost as config } from '../../../build/deployedConfig.json';
+import { abi as FlightSuretyAppABI } from './compiled-contracts/contracts/FlightSuretyApp.json';
+import { localhost as config } from './compiled-contracts/deployedConfig.json';
 
 const url = config.url.replace('http', 'ws');
 const wsProvider = new Web3.providers.WebsocketProvider(url);

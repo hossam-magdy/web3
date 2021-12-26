@@ -43,6 +43,9 @@ const startOracles = async () => {
     // fromBlock: 0,
     {},
     async (_err: any, event: { returnValues: { oracleAddress: string } }) => {
+      if (!event.returnValues) {
+        console.error('[event:OracleRegistered]', { _err, event });
+      }
       const oracleFound = oracles.find(
         (o) => o.address === event.returnValues.oracleAddress
       );

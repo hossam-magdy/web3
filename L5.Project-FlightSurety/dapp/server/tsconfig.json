@@ -1,11 +1,12 @@
 {
-  // Using TS Project References (https://www.typescriptlang.org/docs/handbook/project-references.html)
+  // Using `symlink` to link compiled-contracts from root dir of project `build/**/*.json`
+  // X Using TS Project References (https://www.typescriptlang.org/docs/handbook/project-references.html)
   // To be able to import from, "../../../build/contracts/*.json", and "../../config.json"
-  "references": [
-    {
-      "path": "../../"
-    }
-  ],
+  // "references": [
+  //   {
+  //     "path": "../../"
+  //   }
+  // ],
   "compilerOptions": {
     "target": "es2018",
     "module": "commonjs",

@@ -13,6 +13,7 @@
     "clean": "concurrently -c black.bgYellow,white.bgBlue yarn:clean:client yarn:clean:server",
     "build": "concurrently -c black.bgYellow,white.bgBlue yarn:build:client yarn:build:server",
     "serve": "concurrently -c black.bgYellow,white.bgBlue yarn:serve:client yarn:serve:server",
+    "link-compiled-contracts": "concurrently -c black.bgYellow,white.bgBlue yarn:link-compiled-contracts:client yarn:link-compiled-contracts:server",
     "setup:client": "cd dapp/client && yarn install",
     "setup:server": "cd dapp/server && yarn install",
     "start:client": "cd dapp/client && yarn start",
@@ -22,7 +23,9 @@
     "build:client": "cd dapp/client && yarn build",
     "build:server": "cd dapp/server && yarn build",
     "serve:client": "cd dapp/client && yarn serve",
-    "serve:server": "cd dapp/server && yarn serve"
+    "serve:server": "cd dapp/server && yarn serve",
+    "link-compiled-contracts:client": "cd dapp/client && yarn link-compiled-contracts",
+    "link-compiled-contracts:server": "cd dapp/server && yarn link-compiled-contracts"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.4.1",

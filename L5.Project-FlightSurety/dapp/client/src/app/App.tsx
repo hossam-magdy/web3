@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { useFlightsApi, useFlightSuretyAppContract } from '../hooks';
-import { Flight } from '../types';
-import './App.css';
+import React, { useState } from "react";
+import { Airlines } from "components";
+import { useFlightsApi, useFlightSuretyAppContract } from "hooks";
+import { Flight } from "types";
+import { shortenAddress } from "utils";
 
 export const App: React.FC = () => {
   const { flights, getFlightByNumber } = useFlightsApi();
@@ -10,6 +11,7 @@ export const App: React.FC = () => {
     contract,
     isOperational,
     accounts,
+    airlines,
     defaultAccount,
     isWeb3Initialized,
   } = useFlightSuretyAppContract();
@@ -25,7 +27,7 @@ export const App: React.FC = () => {
   });
 
   const handleSubmitToOracles = () => {
-    console.log('sending fetchFlightStatus', { selectedFlight });
+    console.log("sending fetchFlightStatus", { selectedFlight });
     contract.methods
       .fetchFlightStatus(
         selectedFlight?.airline,
@@ -38,8 +40,8 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div>
+      <header>
         <h2>FlightSuretyApp</h2>
         {!isWeb3Initialized ? (
           <h4>Initializing Web3 …</h4>
@@ -63,6 +65,24 @@ export const App: React.FC = () => {
                 </select>
               </label>
               <button onClick={handleSubmitToOracles}>Submit to Oracles</button>
+            </div>
+            <br />
+            <div>
+              <Airlines
+                airlines={airlines}
+                accounts={accounts}
+                contract={contract}
+              />
+              <p>
+                Accounts:
+                <br />
+                <textarea
+                  cols={42}
+                  rows={32}
+                  readOnly
+                  value={accounts.map(shortenAddress).join("\n")}
+                />
+              </p>
             </div>
           </>
         )}

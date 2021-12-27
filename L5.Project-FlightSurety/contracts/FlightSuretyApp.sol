@@ -6,16 +6,12 @@ pragma solidity ^0.8.0;
 // More info: https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2018/november/smart-contract-insecurity-bad-arithmetic/
 
 import "../node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "./modules/Owner.sol";
+import "./modules/Operational.sol";
+import "./modules/AppAirlines.sol";
 
-/************************************************** */
-/* FlightSurety Smart Contract                      */
-/************************************************** */
-contract FlightSuretyApp {
+contract FlightSuretyApp is Owner, Operational, AppAirlines {
     using SafeMath for uint256; // Allow SafeMath functions to be called for all uint256 types (similar to "prototype" in Javascript)
-
-    /********************************************************************************************/
-    /*                                       DATA VARIABLES                                     */
-    /********************************************************************************************/
 
     // Flight status codees
     uint8 private constant STATUS_CODE_UNKNOWN = 0;
@@ -25,8 +21,6 @@ contract FlightSuretyApp {
     uint8 private constant STATUS_CODE_LATE_TECHNICAL = 40;
     uint8 private constant STATUS_CODE_LATE_OTHER = 50;
 
-    address private contractOwner; // Account used to deploy contract
-
     struct Flight {
         bool isRegistered;
         FlightStatusCode statusCode;
@@ -35,79 +29,16 @@ contract FlightSuretyApp {
     }
     mapping(FlightKey => Flight) private flights;
 
-       // FlightKey = hash(index, flight, timestamp)
+    // FlightKey = hash(index, flight, timestamp)
     type FlightKey is bytes32;
-    
+
     // 0, 10, 20, 30, 40; as per constants STATUS_CODE_*
     type FlightStatusCode is uint8;
 
-
-
-    /********************************************************************************************/
-    /*                                       FUNCTION MODIFIERS                                 */
-    /********************************************************************************************/
-
-    // Modifiers help avoid duplication of code. They are typically used to validate something
-    // before a function is allowed to be executed.
-
-    /**
-     * @dev Modifier that requires the "operational" boolean variable to be "true"
-     *      This is used on all state changing functions to pause the contract in
-     *      the event there is an issue that needs to be fixed
-     */
-    modifier requireIsOperational() {
-        // Modify to call data contract's status
-        require(true, "Contract is currently not operational");
-        _; // All modifiers require an "_" which indicates where the function body will be added
-    }
-
-    /**
-     * @dev Modifier that requires the "ContractOwner" account to be the function caller
-     */
-    modifier requireContractOwner() {
-        require(msg.sender == contractOwner, "Caller is not contract owner");
-        _;
-    }
-
-    /********************************************************************************************/
-    /*                                       CONSTRUCTOR                                        */
-    /********************************************************************************************/
-
-    /**
-     * @dev Contract constructor
-     *
-     */
-    constructor() {
-        contractOwner = msg.sender;
-    }
-
-    /********************************************************************************************/
-    /*                                       UTILITY FUNCTIONS                                  */
-    /********************************************************************************************/
-
-    function isOperational() public pure returns (bool) {
-        return true; // Modify to call data contract's status
-    }
-
-    /********************************************************************************************/
-    /*                                     SMART CONTRACT FUNCTIONS                             */
-    /********************************************************************************************/
-
-    /**
-     * @dev Add an airline to the registration queue
-     *
-     */
-    function registerAirline()
-        external
-        pure
-        returns (bool success, uint256 votes)
-    {
-        return (success, 0);
-    }
+    constructor() {}
 
     /**
      * @dev Register a future flight for insuring.
-     *
      */
     function registerFlight() external pure {
         // TODO?
@@ -115,7 +46,6 @@ contract FlightSuretyApp {
 
     /**
      * @dev Called after oracle has updated flight status
-     *
      */
     function processFlightStatus(
         address airline,
@@ -133,7 +63,7 @@ contract FlightSuretyApp {
         uint256 timestamp
     ) external {
         uint8 index = _getRandomIndex(msg.sender);
-        
+
         FlightKey key = _getFlightKey(index, airline, flight, timestamp);
 
         flightStatusRequests[key] = FlightStatusRequest({
@@ -144,7 +74,9 @@ contract FlightSuretyApp {
         emit OracleRequest(index, airline, flight, timestamp);
     }
 
-    // region ORACLE MANAGEMENT
+    /********************************************************************************************/
+    /*                                      ORACLE MANAGEMENT                                   */
+    /********************************************************************************************/
 
     // Incremented to add pseudo-randomness at various points
     uint8 private nonce = 0;
@@ -172,10 +104,9 @@ contract FlightSuretyApp {
     }
 
     // Track all oracle responses
-    mapping(FlightKey => mapping(FlightStatusCode => address[])) private
-        flightStatusOracleResponses;
-    mapping(FlightKey => FlightStatusRequest) private
-        flightStatusRequests;
+    mapping(FlightKey => mapping(FlightStatusCode => address[]))
+        private flightStatusOracleResponses;
+    mapping(FlightKey => FlightStatusRequest) private flightStatusRequests;
 
     // Event fired each time an oracle submits a response
     event FlightStatusInfo(
@@ -208,7 +139,7 @@ contract FlightSuretyApp {
     function registerOracle() external payable {
         require(msg.value >= REGISTRATION_FEE, "Registration fee is required");
         uint8[3] memory indexes = _generateIndexes(msg.sender);
-        oracles[msg.sender] = Oracle({ isRegistered: true, indexes: indexes });
+        oracles[msg.sender] = Oracle({isRegistered: true, indexes: indexes});
         emit OracleRegistered(msg.sender);
     }
 
@@ -252,8 +183,7 @@ contract FlightSuretyApp {
         // oracles respond with the *** same *** information
         emit OracleReport(airline, flight, timestamp, statusCodeInt);
         if (
-            flightStatusOracleResponses[key][statusCode].length >=
-            MIN_RESPONSES
+            flightStatusOracleResponses[key][statusCode].length >= MIN_RESPONSES
         ) {
             emit FlightStatusInfo(airline, flight, timestamp, statusCodeInt);
 
@@ -268,7 +198,10 @@ contract FlightSuretyApp {
         string memory flight,
         uint256 timestamp
     ) internal pure returns (FlightKey) {
-        return FlightKey.wrap(keccak256(abi.encodePacked(index, airline, flight, timestamp)));
+        return
+            FlightKey.wrap(
+                keccak256(abi.encodePacked(index, airline, flight, timestamp))
+            );
     }
 
     // Returns array of three non-duplicating integers from 0-9
@@ -318,6 +251,4 @@ contract FlightSuretyApp {
 
         return random;
     }
-
-    // endregion
 }

@@ -1,3 +1,5 @@
+import { useFlightSuretyAppContract } from "./hooks";
+
 export type Address = string;
 
 export enum FlightStatusCode {
@@ -15,3 +17,6 @@ export type Flight = {
   timestamp: number;
   statusCode: FlightStatusCode;
 };
+
+// export { Contract } from "web3-eth-contract";
+export type Contract = ReturnType<typeof useFlightSuretyAppContract>["contract"];

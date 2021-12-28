@@ -1,1 +1,0 @@
-export { RegisterAirlineMethod } from "./RegisterAirlineMethod";

@@ -1,1 +1,0 @@
-export { GetAirlineFundsMethod } from "./GetAirlineFundsMethod";

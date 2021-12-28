@@ -1,0 +1,3 @@
+[submodule "L5.Project-FlightSurety"]
+	path = L5.Project-FlightSurety
+	url = https://github.com/hossam-magdy/dapp-flight-delay-insurance

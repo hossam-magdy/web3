@@ -1,8 +1,7 @@
 import { useCallback, useState } from "react";
 import Web3 from "web3";
-import { Address, Contract } from "types";
-import { parseTxError } from "utils";
 import { SelectAccount } from "components/SelectAccount";
+import { Address, Contract } from "types";
 import styles from "./PayAirlineFundsMethod.module.scss";
 
 export const PayAirlineFundsMethod: React.VFC<{
@@ -10,7 +9,7 @@ export const PayAirlineFundsMethod: React.VFC<{
   accounts: Address[];
   contract: Contract;
 }> = ({ airlines, accounts, contract }) => {
-  const [selectedAirline, setSelectedAirline] = useState<Address>();
+  const [selectedAirline, setSelectedAirline] = useState<Address>("");
   const [funds, setFunds] = useState<number>(0);
   const [result, setResult] = useState<String>();
   const [error, setError] = useState<String>();
@@ -20,24 +19,20 @@ export const PayAirlineFundsMethod: React.VFC<{
     suffix: airlines.includes(a) ? " (is airline)" : "",
   }));
 
-  const callPayAirlineFunds = useCallback(async () => {
-    try {
-      await contract.methods.payAirlineFunds().send({
+  const callPayAirlineFunds = useCallback(() => {
+    contract.preparedMethods
+      .payAirlineFunds({
         from: selectedAirline,
         value: Web3.utils.toWei(funds.toString(), "ether"),
-      });
-      setResult(`${funds} eth were successfully funded by ${selectedAirline}`);
-      setError(undefined);
-    } catch (e: any) {
-      const { revertReason } = parseTxError(e);
-      if (revertReason) {
-        setError(revertReason);
-      } else {
-        setError("Unknown Error: " + e?.message);
-        console.error(e);
-      }
-    }
-  }, [contract.methods, funds, selectedAirline]);
+      })
+      .then(() => {
+        setResult(
+          `${funds} eth were successfully funded by ${selectedAirline}`
+        );
+        setError(undefined);
+      })
+      .catch(setError);
+  }, [contract.preparedMethods, funds, selectedAirline]);
 
   return (
     <>

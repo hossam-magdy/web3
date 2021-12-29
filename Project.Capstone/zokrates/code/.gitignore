@@ -1,0 +1,23 @@
+##### ZoKrate generated files
+
+# from: zokrates compile -i square/square.zok
+# which: compile - Generates: `out` binary
+abi.json
+out
+
+# from: zokrates setup
+# which: perform the setup phase - Generates: `proving.key` and `verification.key`
+proof.json
+
+# from: zokrates compute-witness -a 337 113569
+# which: execute the program - Generates: `witness`
+proving.key
+verification.key
+
+# from: zokrates generate-proof
+# which: generate a proof of computation - Generates: `proof.json`
+verifier.sol
+
+# from: zokrates export-verifier
+# which: export a solidity verifier - Generates: `verifier.sol`
+witness

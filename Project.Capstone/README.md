@@ -14,3 +14,25 @@ The capstone will build upon the knowledge you have gained in the course in orde
 - [Interactive zero knowledge 3-colorability demonstration](http://web.mit.edu/~ezyang/Public/graph/svg.html)
 - [Docker](https://docs.docker.com/install/)
 - [ZoKrates](https://github.com/Zokrates/ZoKrates)
+
+## Using [ZoKrates](https://zokrates.github.io/gettingstarted.html)
+
+For: `ZoKrates 0.7.10`
+
+```sh
+docker run -it -v ${PWD}/zokrates/code:/home/zokrates/code zokrates/zokrates:0.7.10 /bin/bash
+cd /home/zokrates/code
+
+# compile - Generates: `out` binary
+zokrates compile -i square/square.zok
+# perform the setup phase - Generates: `proving.key` and `verification.key`
+zokrates setup
+# execute the program - Generates: `witness`
+zokrates compute-witness -a 337 113569
+# generate a proof of computation - Generates: `proof.json`
+zokrates generate-proof
+# export a solidity verifier - Generates: `verifier.sol`
+zokrates export-verifier
+# or verify natively
+zokrates verify
+```

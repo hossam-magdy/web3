@@ -1,3 +1,6 @@
 [submodule "L5.Project-FlightSurety"]
 	path = L5.Project-FlightSurety
 	url = https://github.com/hossam-magdy/dapp-flight-delay-insurance
+[submodule "Project.Capstone"]
+	path = Project.Capstone
+	url = https://github.com/hossam-magdy/erc721-nft-zokrates-zksnarks

@@ -1,5 +1,9 @@
 # Blockchain and Web3
 
+Shaping my understanding of: Web3.0, blockchain, crypto, tokens, NFTs, DFS, … etc, in a bit detailed manner. Mainly via: https://udacity.com/course/nd1309.
+
+---
+
 https://www.udacity.com/course/blockchain-developer-nanodegree--nd1309
 
 https://medium.com/@essentia1/why-the-web-3-0-matters-and-you-should-know-about-it-a5851d63c949
@@ -15,6 +19,8 @@ https://ethereum.org/en/developers/docs
 https://docs.soliditylang.org
 https://docs.chain.link
 https://github.com/paritytech/substrate
+
+---
 
 DAPP UX best practices (L5.6):
 

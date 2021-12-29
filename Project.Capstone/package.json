@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "lite-server",
-    "format": "prettier --write './**/*.{sol,js,md}'",
+    "format": "prettier --write './*.{sol,js,md}'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "lite-server",
     "format": "prettier --write './*.{sol,js,md}'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "zokrates-clean": "git clean -xdf ./zokrates/code",
+    "zokrates-run": "docker run -it -v ${PWD}/zokrates/code:/home/zokrates/code zokrates/zokrates:0.7.10 sh /home/zokrates/code/.run-zokrates.sh"
   },
   "keywords": [],
-  "author": "pk <pkrasam@gmail.com> (https://ipfs.infura.io/ipfs/QmSXiR9Khm3yo1J67nUopvVBxFJ8YGN2fUGZ34Etr3m92x/)",
   "license": "MIT",
   "devDependencies": {
     "lite-server": "2.4.0"

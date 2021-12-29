@@ -4,12 +4,19 @@
 
 Using version `0.7.10`:
 
+`docker run -it -v ${PWD}/zokrates/code:/home/zokrates/code zokrates/zokrates:0.7.10 sh /home/zokrates/code/.run-zokrates.sh`
+
+> shortcut: `yarn zokrates-run`
+
+[OR] the detailed/manual version:
+
 ```sh
 docker run -it -v ${PWD}/zokrates/code:/home/zokrates/code zokrates/zokrates:0.7.10 /bin/bash
 cd /home/zokrates/code
 
+# ref: https://zokrates.github.io/gettingstarted.html
 # compile - Generates: `out` binary
-zokrates compile -i square/square.zok
+zokrates compile -i ./square/square.zok
 # perform the setup phase - Generates: `proving.key` and `verification.key`
 zokrates setup
 # execute the program - Generates: `witness`
